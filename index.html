@@ -4,20 +4,261 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<title>reveal.js</title>
+		<title>DRF &lt3 Redux</title>
 
 		<link rel="stylesheet" href="dist/reset.css">
 		<link rel="stylesheet" href="dist/reveal.css">
-		<link rel="stylesheet" href="dist/theme/black.css">
+		<link rel="stylesheet" href="dist/theme/league.css">
 
 		<!-- Theme used for syntax highlighted code -->
 		<link rel="stylesheet" href="plugin/highlight/monokai.css">
+
+		<style>
+			.loader {
+			  border: 5px solid #f3f3f3;
+			  border-radius: 50%;
+			  border-top: 5px solid #3498db;
+			  width: 20px;
+			  height: 20px;
+			  -webkit-animation: spin 1s linear infinite; /* Safari */
+			  animation: spin 1s linear infinite;
+			  /* display: inline; */
+			}
+
+			/* Safari */
+			@-webkit-keyframes spin {
+			  0% { -webkit-transform: rotate(0deg); }
+			  100% { -webkit-transform: rotate(360deg); }
+			}
+
+			@keyframes spin {
+			  0% { transform: rotate(0deg); }
+			  100% { transform: rotate(360deg); }
+			}
+			</style>
 	</head>
 	<body>
 		<div class="reveal">
 			<div class="slides">
-				<section>Slide 1</section>
-				<section>Slide 2</section>
+				<section>
+					<img src="images/title.png"/>
+					<h3>
+
+						Frontend framework agnostic state management
+					</h3>
+				</section>
+				<section>
+					<h2>
+						Hi, I'm <a href="mailto:sheena.oconnell@umuzi.org"> Sheena </a>
+					  </h2>
+					  <table>
+						<tr>
+						  <td style="vertical-align: top">
+							<ul>
+							  <li class="fragment">
+								@sheena <a href="https://zatech.co.za/">ZATech Slack</a>
+							  </li>
+							  <li class="fragment">
+								CTO of <a href="http://umuzi.org/">Umuzi</a>
+							  </li>
+
+							  <li class="fragment">build people - find high potential geeklings and set them up for career success</li>
+							  <li class="fragment">build stuff - custom collaborative learning platform</li>
+							  <li class="fragment">build processes</li>
+							  <li class="fragment">improve tech ed across Africa</li>
+							</ul>
+						  </td>
+						  <td width="350" style="vertical-align: middle">
+							<img
+							  src="images/me.jpg"
+							  class="avitar"
+							  width="350"
+							/>
+						  </td>
+						</tr>
+					  </table>
+				</section>
+				<section>
+					<h3>Why I'm talking about this</h3>
+				</section>
+				<section>
+					<h2>Django in brief</h2>
+						<ul>
+							<li class="fragment">Workhorse - not the new kid on the block</li>
+							<li class="fragment">For perfectionists with deadlines</li>
+							<li class="fragment">Opinionated => Scalable team</li>
+							<li class="fragment">Well informed opinions => A good teacher</li>
+						</ul>
+				</section>
+				<section>
+					<h2>DRF in brief</h2>
+					<ul>
+						<li class="fragment">Quickest way to make REST apis if you are working with Django</li>
+						<li class="fragment">Web browsable api</li>
+						<li class="fragment">Auth is pretty solid, and compatible with guardian and dj-rest-auth if you need a lil something more</li>
+						<li class="fragment">Easy to expose data from the ORM and other sources</li>
+						<li class="fragment">Under the hood - function-based views => very flexible</li>
+						<li class="fragment">Saved my friggin life</li>
+					</ul>
+				</section>
+				<section>
+					<h2>
+						Demo
+
+					</h2>
+				</section>
+				<section>
+					<h2>Common architecture and needs</h2>
+					<section>
+						<img src="images/architecture1.png" height="400px"/>
+					</section>
+					<section>
+						<ul>
+							<li class="fragment">CRUD and friends</li>
+							<li class="fragment">Fetch data at the right time</li>
+							<li class="fragment">debounce - don't make the same call twice unless you want to</li>
+							<li class="fragment">maintain a store of data: application state</li>
+							<li class="fragment">monitor api call state</li>
+							<li class="fragment">trigger side effects on call success/failure</li>
+						</ul>
+
+					</section>
+					<section>
+						<img src="images/architecture1 and state.png" height="400px"/>
+					</section>
+
+				</section>
+				<section>
+					<h3>
+						Wouldn't it be nice...
+					</h3>
+					if there was a frontend-framework-agnostic tool that could handle all that?
+				</section>
+				<section>
+					<section>
+						<h3>Enter redux</h3>
+						<ul>
+							<li class="fragment">little and strong state management library</li>
+							<li class="fragment">Can work wherever you run your JS code</li>
+							<li class="fragment">Commonly associated with React, but it's a totally separate thing</li>
+							<li class="fragment">Doesn't stop you from using another state management tool in parallel</li>
+						</ul>
+					</section>
+					<section>
+						<h3>Implements <a href="https://facebook.github.io/flux/docs/in-depth-overview/">Flux </a>pattern</h3>
+
+						<img src="images/flux.png"/>
+					</section>
+				</section>
+				<section>
+						<h3>Home automation</h3>
+						<section>
+
+							<pre data-id="code-animation"><code class="hljs" data-trim>
+							store = {
+								lighting: {
+									lounge: DIM,
+									kitchen: OFF
+								},
+								audio: {
+									track: "",
+									playing: OFF
+								},
+								discoBall: OFF
+							}
+							</code></pre>
+					</section>
+
+					<section>
+
+						<pre data-id="code-animation"><code class="hljs" data-trim>
+
+						dispatch({
+							type: PLAY_AUDIO,
+							value: "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+						})
+
+						store = {
+							lighting: {
+								lounge: DIM,
+								kitchen: OFF
+							},
+							audio: {
+								track: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+								playing: ON
+							},
+							discoBall: OFF
+						}
+						</code></pre>
+					</section>
+
+
+					<section>
+
+						<pre data-id="code-animation"><code class="hljs" data-trim>
+
+						dispatch({
+							type: SET_LIGHTING,
+							room: "kitchen",
+							value: ON,
+						})
+
+						store = {
+							lighting: {
+								lounge: DIM,
+								kitchen: ON
+							},
+							audio: {
+								track: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+								playing: ON
+							},
+							discoBall: OFF
+						}
+						</code></pre>
+					</section>
+
+				</section>
+				<section>
+					<h3>What does this have to do with apis</h3>
+
+					<pre data-id="code-animation"><code class="hljs" data-trim>
+
+						store = {
+							API_FUNCTION_1: [{
+								"loading": false,
+								"requestData": {
+									"page": 1,
+									"assigneeUserId": 2,
+								},
+								"responseData": null,
+								"responseOk": null
+							}, {stuff...}, ... ]
+							API_FUNCTION_2: [...]
+						}
+						</code></pre>
+				</section>
+				</section>
+				<section>
+					<h3>Demo time</h3>
+				</section>
+
+				<section>
+					<h3>The bad parts</h3>
+					<ul>
+						<li>Redux is weird and sagas are weirder</li>
+						<li>Learning curve</li>
+						<li>Can appear magical</li>
+					</ul>
+				</section>
+
+				<section>
+					<h3>Future work</h3>
+					<ul>
+						<li>Sockets</li>
+						<li>Rehydrate</li>
+						<li>2 step save</li>
+					</ul>
+				</section>
 			</div>
 		</div>
 
