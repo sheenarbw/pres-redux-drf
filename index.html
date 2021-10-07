@@ -41,10 +41,10 @@
 		<div class="reveal">
 			<div class="slides">
 				<section>
-					<img src="images/title.png"/>
+					<!-- <img src="images/title.png"/> -->
+					<h1>Django Rest Framework &lt3 Redux</h1>
 					<h3>
-
-						Frontend framework agnostic state management
+						JS Frontend framework agnostic state management
 					</h3>
 				</section>
 				<section>
@@ -65,7 +65,7 @@
 							  <li class="fragment">build people - find high potential geeklings and set them up for career success</li>
 							  <li class="fragment">build stuff - custom collaborative learning platform</li>
 							  <li class="fragment">build processes</li>
-							  <li class="fragment">improve tech ed across Africa</li>
+							  <li class="fragment"><a href="https://www.africancoding.network/">ACN</a> - improve tech ed across Africa</li>
 							</ul>
 						  </td>
 						  <td width="350" style="vertical-align: middle">
@@ -86,25 +86,28 @@
 						<ul>
 							<li class="fragment">Workhorse - not the new kid on the block</li>
 							<li class="fragment">For perfectionists with deadlines</li>
-							<li class="fragment">Opinionated => Scalable team</li>
-							<li class="fragment">Well informed opinions => A good teacher</li>
+							<li class="fragment">Opinionated
+								<ul>
+									<li class="fragment">Scalable team</li>
+									<li class="fragment">Well informed opinions => A good teacher</li>
+								</ul>
+							</li>
 						</ul>
 				</section>
 				<section>
 					<h2>DRF in brief</h2>
 					<ul>
 						<li class="fragment">Quickest way to make REST apis if you are working with Django</li>
-						<li class="fragment">Web browsable api</li>
-						<li class="fragment">Auth is pretty solid, and compatible with guardian and dj-rest-auth if you need a lil something more</li>
 						<li class="fragment">Easy to expose data from the ORM and other sources</li>
+						<li class="fragment">Web browsable api</li>
+						<li class="fragment">Auth is pretty solid, and compatible with <a href="https://django-guardian.readthedocs.io/en/stable/">guardian</a> and <a href="https://dj-rest-auth.readthedocs.io/en/latest/">dj-rest-auth</a> if you need a lil something more</li>
 						<li class="fragment">Under the hood - function-based views => very flexible</li>
 						<li class="fragment">Saved my friggin life</li>
 					</ul>
 				</section>
 				<section>
 					<h2>
-						Demo
-
+						<a target="_blank" href="http://127.0.0.1:8000/api/">Demo</a>
 					</h2>
 				</section>
 				<section>
@@ -114,31 +117,45 @@
 					</section>
 					<section>
 						<ul>
-							<li class="fragment">CRUD and friends</li>
+							<li>CRUD and friends</li>
 							<li class="fragment">Fetch data at the right time</li>
-							<li class="fragment">debounce - don't make the same call twice unless you want to</li>
-							<li class="fragment">maintain a store of data: application state</li>
-							<li class="fragment">monitor api call state</li>
-							<li class="fragment">trigger side effects on call success/failure</li>
+							<li class="fragment">Debounce - don't make the same call twice unless you want to</li>
+							<li class="fragment">Maintain a store of data: application state</li>
+							<li class="fragment">Monitor api call state</li>
+							<li class="fragment">Trigger side effects on call success/failure</li>
 						</ul>
-
 					</section>
 					<section>
 						<img src="images/architecture1 and state.png" height="400px"/>
 					</section>
-
-				</section>
-				<section>
-					<h3>
-						Wouldn't it be nice...
-					</h3>
-					if there was a frontend-framework-agnostic tool that could handle all that?
 				</section>
 				<section>
 					<section>
-						<h3>Enter redux</h3>
+						<h3>Looks a little something like this</h3>
+						<img src="images/stack.png"/>
+
+					</section>
+					<section>
+						<h3>
+							How about...
+						</h3>
+						...we handle the api state and logic separately to the other state
+						<br/>
+						<img src="images/stack2.png"/>
+
+					</section>
+
+				</section>
+
+				<section>
+					<h3>Enter redux</h3>
+					<section>
+						<img src="images/redux.png" height="300px"/>
+					</section>
+					<section>
+
 						<ul>
-							<li class="fragment">little and strong state management library</li>
+							<li>Little and strong state management library</li>
 							<li class="fragment">Can work wherever you run your JS code</li>
 							<li class="fragment">Commonly associated with React, but it's a totally separate thing</li>
 							<li class="fragment">Doesn't stop you from using another state management tool in parallel</li>
@@ -224,43 +241,83 @@
 					<pre data-id="code-animation"><code class="hljs" data-trim>
 
 						store = {
-							API_FUNCTION_1: [{
-								"loading": false,
+							FETCH_TODO_ITEMS: [{
+								"loading": true,
 								"requestData": {
 									"page": 1,
 									"assigneeUserId": 2,
 								},
 								"responseData": null,
-								"responseOk": null
+								"responseOk": null,
+								"error": null
 							}, {stuff...}, ... ]
-							API_FUNCTION_2: [...]
+							UPDATE_TODO_ITEM: [...]
 						}
 						</code></pre>
 				</section>
 				</section>
 				<section>
-					<h3>Demo time</h3>
+					<h3><a href="http://127.0.0.1:8001/" target="_blank">
+						Demo time
+					</a>
+				</h3>
+				</section>
+
+				<section>
+					<h3>Misc features</h3>
+					<ul>
+						<li class="fragment">Plays nice with redux debugger</li>
+						<li class="fragment">Easy to reason about forms and form errors</li>
+						<li class="fragment">Converts casing: snake &lt=&gt camel</li>
+						<li class="fragment">Wiki wiki <a href="https://dj-rest-auth.readthedocs.io/en/latest/">Dj rest auth</a></li>
+					</ul>
 				</section>
 
 				<section>
 					<h3>The bad parts</h3>
 					<ul>
-						<li>Redux is weird and sagas are weirder</li>
-						<li>Learning curve</li>
-						<li>Can appear magical</li>
+						<li class="fragment">Redux is weird and sagas are weirder</li>
+						<li class="fragment">Learning curve</li>
+						<li class="fragment">Work in progress</li>
 					</ul>
 				</section>
 
 				<section>
 					<h3>Future work</h3>
 					<ul>
-						<li>Sockets</li>
-						<li>Rehydrate</li>
-						<li>2 step save</li>
+						<li class="fragment">Sockets</li>
+						<li class="fragment">Rehydrate</li>
+						<li class="fragment">2 step save</li>
+						<li class="fragment">Retries</li>
 					</ul>
 				</section>
 				<section>
-					<h2>Links</h2>
+					<h2>Useful links</h2>
+
+					<ul>
+						<li><a href="https://www.djangoproject.com/">Django</a></li>
+						<li><a href="https://www.django-rest-framework.org/">Django Rest Framework</a></li>
+						<li><a href="https://django-guardian.readthedocs.io/en/stable/">Guardian</a></li>
+
+						<li>
+							<a href="https://dj-rest-auth.readthedocs.io/en/latest/">Dj Rest Auth</a>
+						</li>
+						<li><a href="https://redux.js.org/tutorials/essentials/part-1-overview-concepts">Official redux tutorial</a></li>
+
+						<li><a href="https://github.com/redux-saga/redux-saga">Redux Saga</a> </li>
+						<li><a href="https://github.com/sheenarbw/redux-django-rest-framework">
+							redux-django-rest-framework tools
+						</a></li>
+					</ul>
+
+
+
+
+				</section>
+				<section>
+					<h2>You are here</h2>
+
+					<img src="images/qr.png"/>
 				</section>
 			</div>
 		</div>
